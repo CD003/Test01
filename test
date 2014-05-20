@@ -1,0 +1,43 @@
+//========================================================================
+// Script created by the Script Wizard Mon May 19 23:47:17 EST 2014
+//========================================================================
+// Solution Script test test
+// ---------------
+// Command and control for the solution (un-comment to use)
+// stop solution test
+
+create solution test
+	set journaling false
+	set tracing true
+	set version 1.0.4
+	create messagechannel channel_1
+		set parser xml-parser.xml_parser_1
+	end
+
+	create xml-parser xml_parser_1
+		set datamodelbundle cim_xsd
+		set rootelementname person
+		set namespace NULL_NAMESPACE_URI
+	end
+
+	create file-adapter-outbound file_adapter_outbound_1
+		set filename xx.txt
+		set twoway false
+		set subscribequeue channel_1
+		set directory c:\out
+	end
+
+	create file-adapter-inbound fileadapterinbound_1
+		set publishqueue channel_1
+		set twoway false
+		set cron 0/10 * * * * ?
+	end
+
+end
+
+
+// More command and control for the solution (un-comment to use)
+// reload solution test
+
+// start solution test
+
